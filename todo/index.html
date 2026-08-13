@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>나의 할 일 목록</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- 할 일 목록 카드 -->
+<div class="card">
+  <h1>나의 할 일 목록</h1>
+
+  <!-- 할 일 입력 영역 -->
+  <div class="input-area">
+    <input type="text" class="todo-input" placeholder="할 일을 입력하세요">
+    <button class="add-btn">추가</button>
+  </div>
+
+  <!-- 필터 버튼 영역 (전체 / 진행중 / 완료) -->
+  <div class="filter-area">
+    <button class="filter-btn active" data-filter="all">전체</button>
+    <button class="filter-btn" data-filter="active">진행중</button>
+    <button class="filter-btn" data-filter="completed">완료</button>
+  </div>
+
+  <!-- 할 일 목록 영역 -->
+  <ul class="todo-list"></ul>
+
+  <!-- 완료된 항목을 한 번에 삭제하는 버튼 -->
+  <button class="clear-completed-btn">완료된 항목 삭제</button>
+
+  <!-- 전체/완료 개수 표시 영역 -->
+  <p class="todo-count"></p>
+</div>
+
+<!-- 초기화 스크립트 -->
+<script src="main.js"></script>
+</body>
+</html>

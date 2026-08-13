@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 보라색 그라데이션 배경 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: "Segoe UI", sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.calculator {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  width: 380px;
+  max-width: 100%;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0 0 16px;
+  text-align: center;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 수식/결과 디스플레이 */
+.display {
+  background: #1e1b2e;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  text-align: right;
+  overflow: hidden;
+}
+
+.expression {
+  min-height: 20px;
+  color: #b3aed1;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.result {
+  color: white;
+  font-size: 40px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* 버튼 영역 공통 그리드 */
+.pad {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sci-pad {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.num-pad {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 0;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  background: #f0eef7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  opacity: 0.95;
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 공학 함수 / 상수 버튼 */
+.func,
+.const,
+.postfix,
+.paren {
+  color: #4a3d78;
+  background: #e6e1f7;
+  font-size: 13px;
+}
+
+/* DEG/RAD 각도 모드 버튼 */
+.mode {
+  background: #d5cdf0;
+  color: #4a3d78;
+  font-size: 13px;
+}
+
+/* 숫자 버튼 */
+.num {
+  background: #ffffff;
+  color: #333;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 사칙연산 버튼 */
+.op {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 18px;
+}
+
+/* C, ⌫, ± 등 동작 버튼 */
+.action {
+  background: #e57373;
+  color: white;
+  font-size: 15px;
+}
+
+/* = 버튼: 전체 너비 */
+.equals {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  color: white;
+  font-size: 20px;
+  padding: 14px 0;
+}

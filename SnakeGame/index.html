@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스네이크 게임</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>스네이크 게임</h1>
+
+  <div class="score-board">
+    <div class="score-item">
+      <span class="label">점수</span>
+      <span id="score">0</span>
+    </div>
+    <div class="score-item">
+      <span class="label">레벨</span>
+      <span id="level">1</span>
+    </div>
+    <div class="score-item">
+      <span class="label">최고 점수</span>
+      <span id="highScore">0</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="difficulty-select">
+      <label for="difficulty">난이도</label>
+      <select id="difficulty">
+        <option value="200">쉬움</option>
+        <option value="150" selected>보통</option>
+        <option value="100">어려움</option>
+        <option value="50">매우 어려움</option>
+      </select>
+    </div>
+    <button type="button" id="pauseBtn" disabled>일시정지</button>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="overlay" class="overlay">
+      <p id="overlayMessage">방향키로 뱀을 조종하세요</p>
+      <button id="startBtn">게임 시작</button>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

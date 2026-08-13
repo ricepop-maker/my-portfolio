@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>가위 바위 보 게임</title>
+<style>
+html, body {
+  overflow: hidden;
+  margin: 0;
+  height: 100%;
+}
+body {
+  position: relative;
+  background: linear-gradient(270deg, orange, gold, orangered, orange);
+  background-size: 800% 800%;
+  animation: moveBackground 10s ease infinite;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+/* 반짝이는 별 패턴을 얹어 배경을 하나의 그림처럼 꾸며줌 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='20' cy='20' r='3' fill='white' opacity='0.35'/%3E%3Ccircle cx='70' cy='50' r='2' fill='white' opacity='0.25'/%3E%3Ccircle cx='40' cy='90' r='2.5' fill='white' opacity='0.3'/%3E%3Ccircle cx='100' cy='100' r='2' fill='white' opacity='0.2'/%3E%3Ccircle cx='90' cy='15' r='1.5' fill='white' opacity='0.25'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  z-index: 0;
+  pointer-events: none;
+}
+h1, .game-area, #result {
+  position: relative;
+  z-index: 1;
+}
+@keyframes moveBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.game-area {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.choice-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 150px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.choice-btn .btn-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choice-btn .btn-icon img {
+  width: 24px;
+  height: 24px;
+}
+.choice-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+.choice-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+.choice-btn.scissors { background: linear-gradient(135deg, #5aa0ff, #1a5fd1); }
+.choice-btn.rock     { background: linear-gradient(135deg, #a8a8a8, #5c5c5c); }
+.choice-btn.paper    { background: linear-gradient(135deg, #ffe9a8, #d8b84f); color: #5c4a1a; }
+
+.battle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.choice-box {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.25), 0 8px 20px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: scale(0.3);
+}
+.choice-box img {
+  width: 64px;
+  height: 64px;
+}
+.choice-box.show {
+  animation: popIn 0.5s ease forwards;
+}
+.vs {
+  font-size: 26px;
+  font-weight: bold;
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+  70% { opacity: 1; transform: scale(1.3) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+#result {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 20px;
+  min-height: 60px;
+  opacity: 0;
+}
+#result.show {
+  animation: resultPop 0.6s ease forwards;
+}
+#result.win {
+  color: gold;
+  text-shadow: 0 0 10px gold, 0 0 20px orange, 0 0 30px red;
+}
+#result.lose {
+  color: #7fd7ff;
+  text-shadow: 0 0 10px #7fd7ff, 0 0 20px blue;
+}
+#result.draw {
+  color: white;
+  text-shadow: 0 0 10px white, 0 0 20px silver;
+}
+@keyframes resultPop {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.stats {
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #4a3a1a;
+}
+.stats-main {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #c1660a;
+}
+.stats-detail {
+  font-size: 14px;
+  color: #7a6a4a;
+}
+.reset-btn {
+  margin-top: 4px;
+  padding: 6px 18px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #444;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.reset-btn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+.reset-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+.credit {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+<h1>가위바위보 게임</h1>
+
+<div class="game-area">
+  <div class="buttons">
+    <button class="choice-btn scissors" onclick="play('가위')">
+      <span class="btn-icon" id="btnIcon-가위"></span>
+      가위
+    </button>
+    <button class="choice-btn rock" onclick="play('바위')">
+      <span class="btn-icon" id="btnIcon-바위"></span>
+      바위
+    </button>
+    <button class="choice-btn paper" onclick="play('보')">
+      <span class="btn-icon" id="btnIcon-보"></span>
+      보
+    </button>
+  </div>
+
+  <div class="battle">
+    <div id="userChoice" class="choice-box"></div>
+    <div class="vs">VS</div>
+    <div id="computerChoice" class="choice-box"></div>
+  </div>
+</div>
+
+<div id="result"></div>
+
+<div class="stats">
+  <div class="stats-main">
+    <span>총 게임 <span id="totalCount">0</span>회</span>
+    <span>승률 <span id="winRate">0%</span></span>
+  </div>
+  <div class="stats-detail">승 <span id="winCount">0</span> · 무 <span id="drawCount">0</span> · 패 <span id="loseCount">0</span></div>
+  <button class="reset-btn" onclick="resetStats()">기록 초기화</button>
+</div>
+
+<div class="credit">이미지 출처: Twemoji (CC BY 4.0)</div>
+
+<script>
+// 가위/바위/보를 무료 이모지 이미지(Twemoji, CC BY 4.0)로 표현
+const images = {
+  '가위': `<img src="images/scissors.svg" alt="가위">`,
+  '바위': `<img src="images/rock.svg" alt="바위">`,
+  '보': `<img src="images/paper.svg" alt="보">`
+};
+
+// 버튼 아이콘 채우기
+Object.keys(images).forEach(key => {
+  document.getElementById('btnIcon-' + key).innerHTML = images[key];
+});
+
+// 승부 기록
+let stats = { win: 0, lose: 0, draw: 0 };
+
+function updateStatsDisplay() {
+  const total = stats.win + stats.lose + stats.draw;
+  const rate = total === 0 ? 0 : Math.round((stats.win / total) * 100);
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('winRate').textContent = rate + '%';
+  document.getElementById('winCount').textContent = stats.win;
+  document.getElementById('drawCount').textContent = stats.draw;
+  document.getElementById('loseCount').textContent = stats.lose;
+}
+
+function resetStats() {
+  stats = { win: 0, lose: 0, draw: 0 };
+  updateStatsDisplay();
+
+  const userBox = document.getElementById('userChoice');
+  const computerBox = document.getElementById('computerChoice');
+  const resultBox = document.getElementById('result');
+
+  userBox.innerHTML = '';
+  computerBox.innerHTML = '';
+  resultBox.textContent = '';
+  [userBox, computerBox, resultBox].forEach(el => {
+    el.classList.remove('show', 'win', 'lose', 'draw');
+  });
+}
+
+function play(user) {
+  const choices = ['가위', '바위', '보'];
+  const computer = choices[Math.floor(Math.random() * 3)];
+
+  let outcome, resultClass;
+  if (user === computer) {
+    outcome = '무승부 😐';
+    resultClass = 'draw';
+    stats.draw++;
+  } else if (
+    (user === '가위' && computer === '보') ||
+    (user === '바위' && computer === '가위') ||
+    (user === '보' && computer === '바위')
+  ) {
+    outcome = '승리! 🎉';
+    resultClass = 'win';
+    stats.win++;
+  } else {
+    outcome = '패배 😢';
+    resultClass = 'lose';
+    stats.lose++;
+  }
+
+  const userBox = document.getElementById('userChoice');
+  const computerBox = document.getElementById('computerChoice');
+  const resultBox = document.getElementById('result');
+
+  userBox.innerHTML = images[user];
+  computerBox.innerHTML = images[computer];
+  resultBox.textContent = outcome;
+
+  [userBox, computerBox, resultBox].forEach(el => {
+    el.classList.remove('show', 'win', 'lose', 'draw');
+    void el.offsetWidth;
+  });
+  userBox.classList.add('show');
+  computerBox.classList.add('show');
+  resultBox.classList.add('show', resultClass);
+
+  updateStatsDisplay();
+}
+</script>
+</body>
+</html>
