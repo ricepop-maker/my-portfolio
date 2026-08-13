@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>포트폴리오</title>
+<!-- 화면 그리기 전에 저장된 테마를 미리 적용해 깜빡임 방지 -->
+<script>
+document.documentElement.setAttribute('data-theme', localStorage.getItem('portfolio-theme') || 'light');
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +15,15 @@
   <header class="header">
     <h1>My Portfolio</h1>
     <p class="subtitle">직접 만든 프로젝트 모음입니다</p>
+
+    <!-- 테마 선택 스위처 -->
+    <div class="theme-switcher" role="group" aria-label="테마 선택">
+      <button class="theme-btn" data-theme="light" title="라이트">라이트</button>
+      <button class="theme-btn" data-theme="dark" title="다크">다크</button>
+      <button class="theme-btn" data-theme="ocean" title="오션">오션</button>
+      <button class="theme-btn" data-theme="forest" title="포레스트">포레스트</button>
+      <button class="theme-btn" data-theme="sunset" title="선셋">선셋</button>
+    </div>
   </header>
 
   <!-- 프로젝트 카드 목록 -->

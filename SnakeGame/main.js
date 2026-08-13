@@ -67,8 +67,9 @@ function draw() {
   ctx.fillStyle = '#e74c3c';
   ctx.fillRect(food.x * CELL_SIZE, food.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 
-  // 뱀 그리기
-  ctx.fillStyle = '#667eea';
+  // 뱀 그리기 (현재 테마의 강조색을 사용)
+  const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+  ctx.fillStyle = accentColor || '#6c63ff';
   snake.forEach((segment) => {
     ctx.fillRect(segment.x * CELL_SIZE, segment.y * CELL_SIZE, CELL_SIZE - 1, CELL_SIZE - 1);
   });

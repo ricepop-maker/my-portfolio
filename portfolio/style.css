@@ -1,18 +1,74 @@
-/* 다크 모드 포트폴리오 스타일 */
+/* 포트폴리오 스타일 - 테마별 색상은 CSS 변수로 관리 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 기본(라이트) 테마 */
+:root {
+  --bg: #f5f5f7;
+  --card-bg: #ffffff;
+  --card-border: #e0e0e0;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --accent: #6c63ff;
+  --accent-shadow: rgba(108, 99, 255, 0.18);
+}
+
+/* 다크 테마 */
+[data-theme="dark"] {
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --card-border: #2c2c2c;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8;
+  --accent: #6c63ff;
+  --accent-shadow: rgba(108, 99, 255, 0.25);
+}
+
+/* 오션 테마 */
+[data-theme="ocean"] {
+  --bg: #eaf4fb;
+  --card-bg: #ffffff;
+  --card-border: #cfe6f5;
+  --text-primary: #0b3550;
+  --text-secondary: #4a7a94;
+  --accent: #1f8fd1;
+  --accent-shadow: rgba(31, 143, 209, 0.2);
+}
+
+/* 포레스트 테마 */
+[data-theme="forest"] {
+  --bg: #f0f5ec;
+  --card-bg: #ffffff;
+  --card-border: #d7e6cd;
+  --text-primary: #23401f;
+  --text-secondary: #5c7a52;
+  --accent: #4a9c3f;
+  --accent-shadow: rgba(74, 156, 63, 0.2);
+}
+
+/* 선셋 테마 */
+[data-theme="sunset"] {
+  --bg: #fff2e8;
+  --card-bg: #ffffff;
+  --card-border: #ffd9bd;
+  --text-primary: #5a2d0c;
+  --text-secondary: #9c6b3f;
+  --accent: #ff7a45;
+  --accent-shadow: rgba(255, 122, 69, 0.22);
+}
+
 body {
   min-height: 100vh;
-  background-color: #121212;
-  color: #e0e0e0;
+  background-color: var(--bg);
+  color: var(--text-primary);
   font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
   display: flex;
   justify-content: center;
   padding: 60px 20px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .container {
@@ -28,14 +84,45 @@ body {
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: -0.5px;
 }
 
 .subtitle {
   margin-top: 12px;
-  color: #9a9a9a;
+  color: var(--text-secondary);
   font-size: 1.05rem;
+}
+
+/* 테마 스위처 */
+.theme-switcher {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.theme-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.theme-btn:hover {
+  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.theme-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .card-grid {
@@ -45,18 +132,19 @@ body {
 }
 
 .project-card {
-  background-color: #1e1e1e;
-  border: 1px solid #2c2c2c;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 14px;
   padding: 32px 24px;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .project-card:hover {
   transform: translateY(-6px);
-  border-color: #6c63ff;
-  box-shadow: 0 12px 24px rgba(108, 99, 255, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px var(--accent-shadow);
 }
 
 .card-icon {
@@ -66,19 +154,19 @@ body {
 
 .project-card h2 {
   font-size: 1.3rem;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 10px;
 }
 
 .project-card p {
   font-size: 0.92rem;
-  color: #a8a8a8;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 20px;
 }
 
 .card-link {
   font-size: 0.9rem;
-  color: #6c63ff;
+  color: var(--accent);
   font-weight: 600;
 }

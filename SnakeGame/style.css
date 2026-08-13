@@ -4,17 +4,78 @@
   padding: 0;
 }
 
+/* 기본(라이트) 테마 - portfolio와 동일한 색상 체계 */
+:root {
+  --bg: #f5f5f7;
+  --card-bg: #ffffff;
+  --card-border: #e0e0e0;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --accent: #6c63ff;
+  --accent-hover: #5a52e0;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* 다크 테마 */
+[data-theme="dark"] {
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --card-border: #2c2c2c;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8;
+  --accent: #6c63ff;
+  --accent-hover: #8078ff;
+  --overlay-bg: rgba(30, 30, 30, 0.9);
+}
+
+/* 오션 테마 */
+[data-theme="ocean"] {
+  --bg: #eaf4fb;
+  --card-bg: #ffffff;
+  --card-border: #cfe6f5;
+  --text-primary: #0b3550;
+  --text-secondary: #4a7a94;
+  --accent: #1f8fd1;
+  --accent-hover: #1877ad;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* 포레스트 테마 */
+[data-theme="forest"] {
+  --bg: #f0f5ec;
+  --card-bg: #ffffff;
+  --card-border: #d7e6cd;
+  --text-primary: #23401f;
+  --text-secondary: #5c7a52;
+  --accent: #4a9c3f;
+  --accent-hover: #3d8234;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* 선셋 테마 */
+[data-theme="sunset"] {
+  --bg: #fff2e8;
+  --card-bg: #ffffff;
+  --card-border: #ffd9bd;
+  --text-primary: #5a2d0c;
+  --text-secondary: #9c6b3f;
+  --accent: #ff7a45;
+  --accent-hover: #e8632e;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
 body {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Segoe UI', sans-serif;
-  background: #667eea;
+  background: var(--bg);
+  transition: background-color 0.2s ease;
 }
 
 .container {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -23,7 +84,7 @@ body {
 h1 {
   text-align: center;
   font-size: 22px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 16px;
 }
 
@@ -41,14 +102,14 @@ h1 {
 .score-item .label {
   display: block;
   font-size: 13px;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .score-item span:last-child {
   font-size: 20px;
   font-weight: 700;
-  color: #667eea;
+  color: var(--accent);
 }
 
 .controls {
@@ -65,16 +126,18 @@ h1 {
 .difficulty-select label {
   display: block;
   font-size: 13px;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .difficulty-select select {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   font-size: 14px;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 #pauseBtn {
@@ -82,7 +145,7 @@ h1 {
   padding: 9px 16px;
   border: none;
   border-radius: 8px;
-  background: #667eea;
+  background: var(--accent);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -90,7 +153,7 @@ h1 {
 }
 
 #pauseBtn:hover:not(:disabled) {
-  background: #5568d3;
+  background: var(--accent-hover);
 }
 
 #pauseBtn:disabled {
@@ -106,8 +169,8 @@ h1 {
 
 canvas {
   display: block;
-  background: #f5f6fb;
-  border: 2px solid #667eea;
+  background: var(--bg);
+  border: 2px solid var(--accent);
   border-radius: 8px;
 }
 
@@ -119,7 +182,7 @@ canvas {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--overlay-bg);
   border-radius: 8px;
   text-align: center;
   padding: 16px;
@@ -132,14 +195,14 @@ canvas {
 .overlay p {
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .overlay button {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
-  background: #667eea;
+  background: var(--accent);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -147,5 +210,5 @@ canvas {
 }
 
 .overlay button:hover {
-  background: #5568d3;
+  background: var(--accent-hover);
 }
