@@ -17,4 +17,4 @@ When adding a new page or feature, follow the existing pattern of giving it its 
 
 # 주의
 - 주석은 한글로 달아줘
-- 실행할때 상태값 영어말고 한글로 표시해줘
+- 진행상태 한국어로 알려줘
